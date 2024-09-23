@@ -212,7 +212,7 @@ Which renders to:
 
 Permitted Execution Client Specifications URLs must anchor to a specific commit, and so must match this regular expression:
 
-```regex
+```
 ^(https://github.com/ethereum/execution-specs/(blob|commit)/[0-9a-f]{40}/.*|https://github.com/ethereum/execution-specs/tree/[0-9a-f]{40}/.*)$
 ```
 
@@ -230,11 +230,11 @@ Which renders to:
 
 Permitted Execution Specification Tests URLs must anchor to a specific commit, and so must match one of these regular expressions:
 
-```regex
+```
 ^https://(www\.)?github\.com/ethereum/execution-spec-tests/(blob|tree)/[a-f0-9]{40}/.+$
 ```
 
-```regex
+```
 ^https://(www\.)?github\.com/ethereum/execution-spec-tests/commit/[a-f0-9]{40}$
 ```
 
@@ -252,7 +252,7 @@ Which renders to:
 
 Permitted Consensus Layer Specifications URLs must anchor to a specific commit, and so must match this regular expression:
 
-```regex
+```
 ^https://github.com/ethereum/consensus-specs/(blob|commit)/[0-9a-f]{40}/.*$
 ```
 
@@ -270,7 +270,7 @@ Which renders as:
 
 Permitted Networking Specifications URLs must anchor to a specific commit, and so must match this regular expression:
 
-```regex
+```
 ^https://github.com/ethereum/devp2p/(blob|commit)/[0-9a-f]{40}/.*$
 ```
 
@@ -288,7 +288,7 @@ Which renders as:
 
 Permitted Networking Specifications URLs must anchor to a specific commit, and so must match this regular expression:
 
-```regex
+```
 ^https://github.com/ethereum/portal-network-specs/(blob|commit)/[0-9a-f]{40}/.*$
 ```
 
@@ -306,7 +306,7 @@ Which renders as:
 
 Permitted W3C recommendation URLs MUST anchor to a specification in the technical reports namespace with a date, and so MUST match this regular expression:
 
-```regex
+```
 ^https://www\.w3\.org/TR/[0-9][0-9][0-9][0-9]/.*$
 ```
 
@@ -324,7 +324,7 @@ Which renders as:
 
 Permitted WHATWG specification URLs must anchor to a specification defined in the `spec` subdomain (idea specifications are not allowed) and to a commit snapshot, and so must match this regular expression:
 
-```regex
+```
 ^https:\/\/[a-z]*\.spec\.whatwg\.org/commit-snapshots/[0-9a-f]{40}/$
 ```
 
@@ -344,7 +344,7 @@ Which renders as:
 
 Permitted IETF specification URLs MUST anchor to a specification with an assigned RFC number (meaning cannot reference internet drafts), and so MUST match this regular expression:
 
-```regex
+```
 ^https:\/\/www.rfc-editor.org\/rfc\/.*$
 ```
 
@@ -362,7 +362,7 @@ Which renders to:
 
 Permitted Bitcoin Improvement Proposal URLs must anchor to a specific commit, and so must match this regular expression:
 
-```regex
+```
 ^(https://github.com/bitcoin/bips/blob/[0-9a-f]{40}/bip-[0-9]+\.mediawiki)$
 ```
 
@@ -392,7 +392,7 @@ Which renders to:
 
 Permitted Chain Agnostic URLs must anchor to a specific commit, and so must match this regular expression:
 
-```regex
+```
 ^(https://github.com/ChainAgnostic/CAIPs/blob/[0-9a-f]{40}/CAIPs/caip-[0-9]+\.md)$
 ```
 
@@ -410,7 +410,7 @@ Which renders to:
 
 Permitted Yellow Paper URLs must anchor to a specific commit, and so must match this regular expression:
 
-```regex
+```
 ^(https://github\.com/ethereum/yellowpaper/blob/[0-9a-f]{40}/paper\.pdf)$
 ```
 
@@ -428,7 +428,7 @@ Which renders to:
 
 Permitted Execution Client Specification Tests URLs must anchor to a specific commit, and so must match this regular expression:
 
-```regex
+```
 ^(https://github.com/ethereum/execution-spec-tests/(blob|commit)/[0-9a-f]{40}/.*|https://github.com/ethereum/execution-spec-tests/tree/[0-9a-f]{40}/.*)$
 ```
 
