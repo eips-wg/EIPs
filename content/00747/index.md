@@ -18,7 +18,7 @@ This EIP standardizes a new wallet-scoped RPC method, `wallet_watchAsset`, to al
 ## Motivation
 
 Today, one of the major uses of Ethereum wallets is to track users' assets.
-Without this EIP, each wallet either needs to pre-load a list of approved assets, or users must manually add assets to their wallet.
+Withoutt this EIP, each wallet either needs to pre-load a list of approved assets, or users must manually add assets to their wallet.
 In the first case, wallets are burdened with both the security of managing this list, as well as the bandwidth of mass polling for known assets on their wallet.
 In the second case, the user experience is terrible.
 
