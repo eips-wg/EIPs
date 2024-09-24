@@ -14,7 +14,7 @@ requires: 20, 1046, 1193
 ## Abstract
 
 This EIP standardizes a new wallet-scoped RPC method, `wallet_watchAsset`, to allow a client to suggest a token for the user's wallet to track.
-
+developping
 ## Motivation
 
 Today, one of the major uses of Ethereum wallets is to track users' assets.
