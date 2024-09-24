@@ -14,11 +14,11 @@ requires: 20, 1046, 1193
 ## Abstract
 
 This EIP standardizes a new wallet-scoped RPC method, `wallet_watchAsset`, to allow a client to suggest a token for the user's wallet to track.
-
+developping
 ## Motivation
 
 Today, one of the major uses of Ethereum wallets is to track users' assets.
-Without this EIP, each wallet either needs to pre-load a list of approved assets, or users must manually add assets to their wallet.
+Withoutt this EIP, each wallet either needs to pre-load a list of approved assets, or users must manually add assets to their wallet.
 In the first case, wallets are burdened with both the security of managing this list, as well as the bandwidth of mass polling for known assets on their wallet.
 In the second case, the user experience is terrible.
 
@@ -27,6 +27,12 @@ In the second case, the user experience is terrible.
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119 and RFC 8174.
 
 A new RPC method, `wallet_watchAsset` is added. `wallet_watchAsset` requests that a specified asset be listed to the user's wallet. It MUST immediately (i.e. before prompting the user) return `true` if the request was valid, or error if it was not. The meaning of "listed to the user's wallet" is dependent on the wallet implementation. A successful call to `wallet_watchAsset` MUST indicate that the wallet recognized the request and that it contained no issues, but doesn't indicate whether the user was prompted or whether the asset was actually added to the wallet.
+
+- one bullet
+- two bullet
+- three bullet
+
+###hello
 
 ### `wallet_watchAsset` Parameters
 
@@ -38,6 +44,9 @@ interface WatchAssetParameters {
   options: any;
 }
 ```
+
+ * another bullet
+ * another bullet
 
 The `type` string SHOULD be the commonly accepted name of the interface implemented by the asset's contract, e.g. `ERC1046`. Defining the global identifiers for different asset types is beyond the scope of this EIP.
 

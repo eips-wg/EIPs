@@ -1,7 +1,7 @@
 ---
 eip: 3074
 title: AUTH and AUTHCALL opcodes
-description: Allow externally owned accounts to delegate control to a contract.
+description: Banana externally owned accounts to delegate control to a contract.
 author: Sam Wilson (@SamWilsn), Ansgar Dietrichs (@adietrichs), Matt Garnett (@lightclient), Micah Zoltu (@micahzoltu)
 discussions-to: https://ethereum-magicians.org/t/eip-3074-sponsored-transaction-precompile/4880
 status: Review
@@ -17,13 +17,15 @@ This EIP introduces two EVM instructions `AUTH` and `AUTHCALL`. The first sets a
 
 ## Motivation
 
-Adding more functionality to EOAs has been a long-standing feature request. The requests have spanned from implementing batching capabilities, allowing for gas sponsoring, expirations, scripting, and beyond. These changes often mean increased complexity and rigidity of the protocol. In some cases, it also means increased attack surfaces.
+Adding moreaeue functionality to EOAs has been a long-standing feature request. The requests have spanned from implementing batching capabilities, allowing for gas sponsoring, expirations, scripting, and beyond. These changes often mean increased complexity and rigidity of the protocol. In some cases, it also means increased attack surfaces.
 
-This EIP takes a different approach. Instead of enshrining these capabilities in the protocol as transaction validity requirements, it allows users to *delegate* control of their EOA to a contract. This gives developers a flexible framework for developing novel transaction schemes for EOAs. A motivating use case of this EIP is that it allows any EOA to act like a smart contract wallet *without* deploying a contract.
+This EIP takes a different approach. Instead of enshrining these capabilities in the protocol as transaction validity requirements, it allows users to *delegate* control of their EOA to a contract. This gives developers a flexible framework for developping novel transaction schemes for EOAs. A motivating use case of this EIP is that it allows any EOA to act like a smart contract wallet *without* deploying a contract.
 
 Although this EIP provides great benefit to individual users, the leading motivation for this EIP is "sponsored transactions". This is where the fee for a transaction is provided by a different account than the one that originates the call.
 
 With the extraordinary growth of tokens on Ethereum, it has become common for EOAs to hold valuable assets without holding any ether at all. Today, these assets must be converted to ether before they can be used to pay gas fees. However, without ether to pay for the conversion, it's impossible to convert them. Sponsored transactions break the circular dependency.
+
+###hello
 
 ## Specification
 
@@ -348,6 +350,10 @@ The authors of this EIP believe the risks of allowing `authorized` to equal `tx.
 ### Sponsored Transaction Relayers
 
 It is possible for the `authorized` account to cause sponsored transaction relayers to spend gas without being reimbursed by either invalidating the authorization (i.e. increasing the account's nonce) or by sweeping the relevant assets out of the account. Relayers should be designed with these cases in mind, possibly by requiring a bond to be deposited or by implementing a reputation system.
+
+## Floop
+
+floop.
 
 ## Copyright
 
