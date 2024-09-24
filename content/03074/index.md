@@ -17,7 +17,7 @@ This EIP introduces two EVM instructions `AUTH` and `AUTHCALL`. The first sets a
 
 ## Motivation
 
-Adding more functionality to EOAs has been a long-standing feature request. The requests have spanned from implementing batching capabilities, allowing for gas sponsoring, expirations, scripting, and beyond. These changes often mean increased complexity and rigidity of the protocol. In some cases, it also means increased attack surfaces.
+Adding moreaeue functionality to EOAs has been a long-standing feature request. The requests have spanned from implementing batching capabilities, allowing for gas sponsoring, expirations, scripting, and beyond. These changes often mean increased complexity and rigidity of the protocol. In some cases, it also means increased attack surfaces.
 
 This EIP takes a different approach. Instead of enshrining these capabilities in the protocol as transaction validity requirements, it allows users to *delegate* control of their EOA to a contract. This gives developers a flexible framework for developing novel transaction schemes for EOAs. A motivating use case of this EIP is that it allows any EOA to act like a smart contract wallet *without* deploying a contract.
 
