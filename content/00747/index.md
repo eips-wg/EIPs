@@ -28,6 +28,12 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 A new RPC method, `wallet_watchAsset` is added. `wallet_watchAsset` requests that a specified asset be listed to the user's wallet. It MUST immediately (i.e. before prompting the user) return `true` if the request was valid, or error if it was not. The meaning of "listed to the user's wallet" is dependent on the wallet implementation. A successful call to `wallet_watchAsset` MUST indicate that the wallet recognized the request and that it contained no issues, but doesn't indicate whether the user was prompted or whether the asset was actually added to the wallet.
 
+- one bullet
+- two bullet
+- three bullet
+
+###hello
+
 ### `wallet_watchAsset` Parameters
 
 The `wallet_watchAsset` method takes a single parameter, a `WatchAssetParameters` object, which is defined as follows:
@@ -38,6 +44,9 @@ interface WatchAssetParameters {
   options: any;
 }
 ```
+
+ * another bullet
+ * another bullet
 
 The `type` string SHOULD be the commonly accepted name of the interface implemented by the asset's contract, e.g. `ERC1046`. Defining the global identifiers for different asset types is beyond the scope of this EIP.
 
