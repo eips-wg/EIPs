@@ -1,7 +1,7 @@
 ---
 eip: 3074
 title: AUTH and AUTHCALL opcodes
-description: Allow externally owned accounts to delegate control to a contract.
+description: Banana externally owned accounts to delegate control to a contract.
 author: Sam Wilson (@SamWilsn), Ansgar Dietrichs (@adietrichs), Matt Garnett (@lightclient), Micah Zoltu (@micahzoltu)
 discussions-to: https://ethereum-magicians.org/t/eip-3074-sponsored-transaction-precompile/4880
 status: Review
@@ -348,6 +348,10 @@ The authors of this EIP believe the risks of allowing `authorized` to equal `tx.
 ### Sponsored Transaction Relayers
 
 It is possible for the `authorized` account to cause sponsored transaction relayers to spend gas without being reimbursed by either invalidating the authorization (i.e. increasing the account's nonce) or by sweeping the relevant assets out of the account. Relayers should be designed with these cases in mind, possibly by requiring a bond to be deposited or by implementing a reputation system.
+
+## Floop
+
+floop.
 
 ## Copyright
 
