@@ -39,7 +39,7 @@ We introduce `P256VERIFY` a precompile at the address `0x100` which performs ECD
 
 The secp256r1 curve is fully defined by the following set of parameters:
 
-``` text
+```
 Base field modulus = p = 0xffffffff00000001000000000000000000000000ffffffffffffffffffffffff
 Curve equation: y^2 = x^3 + ax + b (mod p)
 Curve coefficient a = 0xffffffff00000001000000000000000000000000fffffffffffffffffffffffc
