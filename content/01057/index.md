@@ -200,7 +200,7 @@ uint32_t kiss99(kiss99_t &st)
 
 The `fill_mix` function populates an array of `int32` values used by each lane in the hash calculations.
 
-Test vectors can be found [in the test vectors file](./assets/test-vectors.md#fill_mix).
+Test vectors can be found [in the test vectors file](./assets/test-vectors.md#fill-mix).
 
 ```cpp
 void fill_mix(
