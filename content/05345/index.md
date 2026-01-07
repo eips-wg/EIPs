@@ -41,7 +41,7 @@ The implementation introduces new RPC methods and flow for application and walle
 
 This RPC method opens the wallet and prompts the user to enable automatic signing for a specific time duration. This function grants the application to call the following methods until the timestamp expires. Standard methods like `eth_signTrancaction` remain untouched.
 
-```shell
+```bash
 Parameters
   Object: request object
     until: NUMBER - unix timesptamp, the end time the permission will be valid
@@ -59,7 +59,7 @@ Returns
 
 This RPC method creates a transaction and sends its data to the wallet for signing. The wallet signs the data in the background, interfering with no processes the user is involved in. Afterward, the application sends the signed transaction to the blockchain using Nethereum's or other libraries' `sendRawTransaction` method.
 
-```shell
+```bash
 Parameters
   DATA, 20 Bytes: permissionSecret - secret key obtained from `wallet_requestSilentSign` method
   Object - The transaction object
@@ -79,7 +79,7 @@ Returns
 
 This RPC method creates a transaction and sends it to the blockchain without interfering with the process the user is involved in.
 
-```shell
+```bash
 Parameters
   DATA, 20 Bytes: permissionSecret - secret key obtained from `wallet_requestSilentSign` method
   Object - The transaction object

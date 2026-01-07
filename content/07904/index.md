@@ -233,7 +233,7 @@ Further research might be required to ensure that contracts that use hard coded 
 
 Code:
 
-```mnemonic
+```
 PUSH1 0x60
 ```
 
@@ -243,7 +243,7 @@ Gas cost: 1
 
 Code:
 
-```mnemonic
+```
 PUSH2 0x0202
 PUSH2 0x1000
 EXP
@@ -259,7 +259,7 @@ TODO: This EIP is a relatively simple change, but requires updates in many tests
 
 The reference implementation in Go-Ethereum provides new instruction set and new `memoryGasCost` function. Additionally it contains a set of overrides for specific gas elements. The actual implementation requires proper versioning of the overrides.
 
-```golang
+```go
 const (
   RepricedGasBaseStep         uint64 = 1
   RepricedGasFastStep         uint64 = 2
