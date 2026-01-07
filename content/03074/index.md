@@ -14,7 +14,7 @@ withdrawal-reason: Superseded by EIP-7702
 
 ## Abstract
 
-This EIP introduces two EVM instructions `AUTH` and `AUTHCALL`. The first sets a context variable `authorized` based on an ECDSA signature. The second sends a call as the `authorized` account. This essentially delegates control of the externally owned account (EOA) to a smart contract.
+This EIP introduces two EVM instructions `AUTH` and `AUTHCALL`. The first sets a context variable `authorized` based on an ECDSA signature. The second sends a call as the `authorized` account. This essentially delegates control of the externally owned account (EOA) to a smart contract. Florg.
 
 ## Motivation
 
