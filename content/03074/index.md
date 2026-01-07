@@ -146,7 +146,7 @@ A new opcode `AUTHCALL` shall be created at `0xf7`. It shall take seven stack el
 
  - If `authorized` is unset, execution is invalid (as defined above). Otherwise, the caller address for the call is set to `authorized`.
  - The gas cost, including how much gas is available for the subcall, is specified in the Gas Cost section.
- - If the `gas` operand is equal to `0`, the instruction will send all available gas as per [EIP-150](./eip-150).
+ - If the `gas` operand is equal to `0`, the instruction will send all available gas as per [EIP-150](../00150.md).
  - If the gas available for the subcall would be less than `gas`, execution is invalid.
  - There is no gas stipend, even for non-zero `value`.
  - `value` is deducted from the balance of `authorized`. If `value` is higher than the balance of `authorized`, execution is invalid.
@@ -316,7 +316,7 @@ For this reason, `AUTH` requires the `nonce` in the message to be equal to the s
 
 ### Failing on `EXTCODESIZE` check
 
-In [EIP-3607](./eip-3607), it was determined that the protocol should reject any transaction which originates from an account with code. Although this EIP focused on transaction origination, the authors of EIP-3074 feel the intention is clear: an account that has both code and a known private key should not be allowed to make arbitrary calls on behalf of said account. Therefore, the property is upheld in this EIP. For full rationale, please refer to [EIP-3607](./eip-3607).
+In [EIP-3607](../03607.md), it was determined that the protocol should reject any transaction which originates from an account with code. Although this EIP focused on transaction origination, the authors of EIP-3074 feel the intention is clear: an account that has both code and a known private key should not be allowed to make arbitrary calls on behalf of said account. Therefore, the property is upheld in this EIP. For full rationale, please refer to [EIP-3607](../03607.md).
 
 ## Backwards Compatibility
 
