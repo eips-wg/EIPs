@@ -218,7 +218,7 @@ Clients compute intrinsic gas as today for each typed transaction **except**:
 
 ### Pseudocode (normative):
 
-```text
+```
 function CalculateIntrinsicGas(tx, state_at_start):
     gasCost = TX_BASE_COST
 
