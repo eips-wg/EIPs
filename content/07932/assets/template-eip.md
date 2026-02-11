@@ -18,7 +18,7 @@ Generic algorithm has a good reason to be in Ethereum, therefore it should be.
 
 ## Specification
 
-This EIP defines a new [EIP-7932](../../EIPS/eip-7932.md) algorithmic type with the following parameters.
+This EIP defines a new [EIP-7932](../index.md) algorithmic type with the following parameters.
 
 ```python
 ALG_TYPE = 0xFA
