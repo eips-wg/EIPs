@@ -44,7 +44,7 @@ shift = max(bit_length(shifted) - CPSB_SIGNIFICANT_BITS, 0)
 cost_per_state_byte = max(((shifted >> shift) << shift) - CPSB_OFFSET, 1)
 ```
 
-The raw value is the unquantized cost derived from targeting `TARGET_STATE_GROWTH_PER_YEAR` at 50% average gas utilization (see [Deriving the cost per byte](#deriving-the-cost-per-byte)). Quantization retains the top `CPSB_SIGNIFICANT_BITS` significant bits after applying `CPSB_OFFSET`, producing a stepped function that avoids frequent small changes as the gas limit fluctuates (see [Quantization](#quantization-of-cost_per_state_byte)).
+The raw value is the unquantized cost derived from targeting `TARGET_STATE_GROWTH_PER_YEAR` at 50% average gas utilization (see [Deriving the cost per byte](#deriving-the-cost-per-byte)). Quantization retains the top `CPSB_SIGNIFICANT_BITS` significant bits after applying `CPSB_OFFSET`, producing a stepped function that avoids frequent small changes as the gas limit fluctuates (see [Quantization](#quantization-of-cost-per-state-byte)).
 
 ### Parameter changes
 
