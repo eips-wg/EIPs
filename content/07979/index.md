@@ -248,11 +248,11 @@ Some real-time interpreter performance gains will be had, as reflected in the lo
 
 ### Why no immediate arguments?
 
-This would of course break the promise of "the smallest possible change."  [EIP-8013: Static relative jumps and calls for the EVM](./eip-8013) is available if we want its size and performance advantages. It proposes five new EVM jump instructions (`RJUMP`, `RJUMPI`, `RJUMPV`, `RJUMPSUB`, and `RJUMPSUBV`) which encode destinations as signed immediate values. These can be useful for almost all `JUMP` and `JUMPI` use cases and offer improvements in cost, performance, and static analysis.
+This would of course break the promise of "the smallest possible change."  [EIP-8013: Static relative jumps and calls for the EVM](../08013.md) is available if we want its size and performance advantages. It proposes five new EVM jump instructions (`RJUMP`, `RJUMPI`, `RJUMPV`, `RJUMPSUB`, and `RJUMPSUBV`) which encode destinations as signed immediate values. These can be useful for almost all `JUMP` and `JUMPI` use cases and offer improvements in cost, performance, and static analysis.
 
 ### Why no code sections?
 
-Again, this would break the promise of "the smallest possible change," and [EIP-3540: EOF - EVM Object Format](./eip-3540) remains available. But note that restricting jumps to code sections impedes important optimizations, which EOF supported by adding special opcodes.  So if we want restricted code sections this becomes a much bigger change, and we should consider [EOF - Functions](./eip-4750) and related EIPs separately.  This proposal uses the same return-stack mechanism and poses no forwards compatability issues with EOF.
+Again, this would break the promise of "the smallest possible change," and [EIP-3540: EOF - EVM Object Format](../03540.md) remains available. But note that restricting jumps to code sections impedes important optimizations, which EOF supported by adding special opcodes.  So if we want restricted code sections this becomes a much bigger change, and we should consider [EOF - Functions](../04750.md) and related EIPs separately.  This proposal uses the same return-stack mechanism and poses no forwards compatability issues with EOF.
 
 ### Why the return-stack mechanism?
 

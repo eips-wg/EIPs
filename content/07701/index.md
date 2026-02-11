@@ -40,7 +40,7 @@ A more detailed motivation for this proposal can be found in the [README documen
 
 ### New Transaction Type
 
-A new [EIP-2718](./eip-2718) transaction with type `AA_TX_TYPE` is introduced.
+A new [EIP-2718](../02718.md) transaction with type `AA_TX_TYPE` is introduced.
 Transactions of this type are referred to as "AA transactions".
 
 Their payload should be interpreted as:
@@ -125,7 +125,7 @@ In all top-level frames, the global variables have the following meaning:
 The Sender address is pre-warmed as part of the `AA_BASE_GAS_COST`.
 
 When a non-zero address that is not equal to the `Sender` address, is provided for a `Paymaster` or a `Deployer` contract,
-an additional [EIP-2930](./eip-2930) `ACCESS_LIST_ADDRESS_COST` cost of **2400 gas** is charged and the address is added to `accessed_addresses`.
+an additional [EIP-2930](../02930.md) `ACCESS_LIST_ADDRESS_COST` cost of **2400 gas** is charged and the address is added to `accessed_addresses`.
 
 ### AA transaction processing flow
 
