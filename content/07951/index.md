@@ -113,7 +113,7 @@ The precompile MUST perform the following validation checks and return `` (failu
 
 The verification algorithm follows these steps:
 
-```text
+```
 # Input validation (as specified above)
 if input_length != 160:
     return
