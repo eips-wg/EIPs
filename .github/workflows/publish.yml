@@ -22,6 +22,26 @@ jobs:
         with:
           args: build
 
+      # Sitemap submission is production-only; do not publish IndexNow keys
+      # from the eips-wg staging repository even though it can build Pages.
+      - name: Add IndexNow Key File
+        if: github.repository == 'ethereum/EIPs' && vars.ENABLE_SITEMAP_SUBMIT == '1'
+        env:
+          ARTIFACT_DIR: build/output
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          if [ -z "$INDEXNOW_KEY" ]; then
+            echo "::warning title=IndexNow key missing::INDEXNOW_KEY is not configured; skipping key file generation"
+            exit 0
+          fi
+
+          if [[ ! "$INDEXNOW_KEY" =~ ^[A-Za-z0-9-]{8,128}$ ]]; then
+            echo "::warning title=Invalid IndexNow key::INDEXNOW_KEY must match ^[A-Za-z0-9-]{8,128}$; skipping key file generation"
+            exit 0
+          fi
+
+          printf '%s' "$INDEXNOW_KEY" > "${ARTIFACT_DIR}/${INDEXNOW_KEY}.txt"
+
       - name: Upload Artifact
         id: artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # 3.0.1
@@ -43,3 +63,40 @@ jobs:
       - name: Publish Pages
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # 4.0.5
+
+  submit-sitemap:
+    # Sitemap submission notifies production search providers only.
+    if: github.repository == 'ethereum/EIPs' && vars.ENABLE_SITEMAP_SUBMIT == '1'
+    name: Submit Sitemap
+    runs-on: ubuntu-latest
+    needs: publish
+    concurrency:
+      group: sitemap-submit-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
+
+      - name: Authenticate to Google
+        id: google-auth
+        if: vars.GOOGLE_WORKLOAD_IDENTITY_PROVIDER != '' && vars.GOOGLE_SERVICE_ACCOUNT != ''
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ vars.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GOOGLE_SERVICE_ACCOUNT }}
+          access_token_scopes: https://www.googleapis.com/auth/webmasters
+
+      - name: Submit Sitemap
+        env:
+          SITE_URL: https://eips.ethereum.org/
+          GOOGLE_ACCESS_TOKEN: ${{ steps.google-auth.outputs.access_token }}
+          GOOGLE_SEARCH_CONSOLE_SITE_URL: ${{ vars.GOOGLE_SEARCH_CONSOLE_SITE_URL }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_ENDPOINT: https://api.indexnow.org/indexnow
+          HTTP_TIMEOUT_SECONDS: "15"
+          SITEMAP_SUBMIT_STRICT: "0"
+        run: python3 scripts/submit-sitemap.py
