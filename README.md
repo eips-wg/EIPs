@@ -1,76 +1,226 @@
 # EIPs vs. ERCs
 
 > [!IMPORTANT]
-> Please direct application-level proposals (ERCs) to [`ethereum/ERCs`] and all
-> other proposals (EIPs) to [`ethereum/EIPs`].
+> Please direct application-level proposals (ERCs) to [`ethereum/ERCs`] and all other proposals (EIPs) to [`ethereum/EIPs`].
 
 # Ethereum Improvement Proposals (EIPs)
 
-The EIP project standardizes and provides high-quality documentation for
-Ethereum itself and conventions built upon it. This repository tracks past and
-ongoing improvements to Ethereum in the form of Ethereum Improvement
-Proposals (EIPs). [EIP-1] governs how EIPs are published.
+The EIP project standardizes and provides high-quality documentation for Ethereum itself and conventions built upon it. This repository tracks past and ongoing improvements to Ethereum in the form of Ethereum Improvement Proposals (EIPs). [EIP-1] governs how EIPs are published.
 
 ## Taxonomy
 
-The [status page][status] tracks and lists EIPs, which can be divided into the
-following types and categories:
+The [status page][status] tracks and lists EIPs, which can be divided into the following types and categories:
 
 - [Core EIPs] are improvements to the Ethereum consensus protocol.
 - [Networking EIPs] specify the peer-to-peer networking layer of Ethereum.
-- [Interface EIPs] standardize interfaces to Ethereum, which determine how
-  users and applications interact with the blockchain.
-- [ERCs] specify application layer standards, which determine how applications
-  running on Ethereum can interact with each other.
-- [Meta EIPs] are miscellaneous improvements that nonetheless require some sort
-  of consensus.
-- [Informational EIPs] are non-standard improvements that do not require any
-  form of consensus.
+- [Interface EIPs] standardize interfaces to Ethereum, which determine how users and applications interact with the blockchain.
+- [ERCs] specify application layer standards, which determine how applications running on Ethereum can interact with each other.
+- [Meta EIPs] are miscellaneous improvements that nonetheless require some sort of consensus.
+- [Informational EIPs] are non-standard improvements that do not require any form of consensus.
 
 ## Contributing
 
 > [!WARNING]
-> Before you write an EIP, ideas MUST be thoroughly discussed on
-> [Ethereum Magicians][ethmag] or [Ethereum Research][ethres]. Once consensus
-> is reached, thoroughly read and review [EIP-1], which describes the EIP
-> process.
+> Before you write an EIP, ideas MUST be thoroughly discussed on [Ethereum Magicians][ethmag] or [Ethereum Research][ethres]. Once consensus is reached, thoroughly read and review [EIP-1], which describes the EIP process.
 
-To create a new proposal, **copy** the [Proposal Template][template] into the
-[`contents`] directory and rename it to `99999.md` (or `99999/index.md` if you
-have additional assets). The template has more detailed instructions.
+To create a new proposal, **copy** the [Proposal Template][template] into the [`contents`] directory and rename it to `99999.md` (or `99999/index.md` if you have additional assets). The template has more detailed instructions.
 
-This repository is for documenting standards and not for help implementing
-them. These types of inquiries should be directed to the
-[Ethereum Stack Exchange][ethex]. For specific questions and concerns regarding
-EIPs, it's best to comment on the relevant discussion thread of the EIP denoted
-by the `discussions-to` tag in the EIP's preamble.
+This repository is for documenting standards and not for help implementing them. These types of inquiries should be directed to the [Ethereum Stack Exchange][ethex]. For specific questions and concerns regarding EIPs, it's best to comment on the relevant discussion thread of the EIP denoted by the `discussions-to` tag in the EIP's preamble.
 
 If you would like to become an EIP Editor, please read [EIP-5069].
 
 ### Validation and Auto-merging
 
-All pull requests in this repository must pass checks before they can be
-automatically merged:
+All pull requests in this repository must pass checks before they can be automatically merged:
 
 - [eip-review-bot] determines when PRs can be automatically merged [^1]
 - EIP-1 rules are enforced using [`eipw`] [^2]
 - Markdown best practices are checked using [markdownlint] [^2]
+- `build-eips` runs targeted proposal validation and site checks for changed proposal files [^2]
 
-### Building Locally
+Before opening or updating a pull request, run the same CI-style command locally as described in [Editorial Validation](#editorial-validation): `build-eips --staging editorial check --against-upstream --format github`.
 
-It is possible to run the above checks and preview how proposals will render
-using [`build-eips`]. See its documentation for more details.
+## Local Workflows
+
+The EIPs repo uses the shared `build-eips` multi-repo workspace for local site builds, live previews, and editorial validation. The setup script bootstraps the surrounding workspace so, with just a few commands, you can:
+
+* run targeted `eipw` editorial checks for proposals before opening or updating pull requests
+* build and serve the EIPs site with the local theme repo and sibling proposal repos like ERCs
+* include tracked local edits without committing them first
+* render only selected proposals to save time when a full site build is unnecessary
+* diagnose missing workspace pieces with `build-eips doctor`
+
+Run the commands below from this EIPs repo. From the workspace root, use `-C EIPs` before the command.
+
+### Minimum Requirements
+
+Local workspace commands require these tools on `PATH`:
+
+* Git
+* `build-eips`
+* Zola 0.22.1
+
+Git must be installed separately. The setup script locates or installs `build-eips` and Zola, adds locally installed tool directories to `PATH` for the current shell session, and prints guidance for making those `PATH` changes permanent.
+
+### Bootstrap The Workspace
+
+Run the setup script once from this repo.
+
+Linux and macOS:
+
+```sh
+./scripts/dev-setup
+```
+
+Windows PowerShell:
+
+```powershell
+.\scripts\dev-setup.ps1
+```
+
+The setup script initializes the workspace one directory above this repo, runs `build-eips doctor`, and prints the next local commands.
+
+After setup, the generated workspace guide is available at `../WORKSPACE.md`. Use that file for the full command reference and workspace details.
+
+After setup, the workspace has this layout:
+
+```text
+EIPs-project/
+├── .build-eips.toml
+├── WORKSPACE.md
+├── .local-build/
+├── EIPs/
+├── ERCs/
+└── theme/
+```
+
+### Build And Serve Locally
+
+Build the full static site, then preview that built output:
+
+```bash
+build-eips build
+build-eips preview
+```
+
+`preview` serves the last output written by `build`. Run `build` again before `preview` when you want to inspect fresh output.
+
+Use `serve` when you want a live development server that livereloads changes instead of a reusable build output:
+
+```bash
+build-eips serve
+```
+
+`serve` runs a fresh temporary site build each time it is invoked (without using `build`), starts a local development server, and watches tracked local edits. Its output cannot be reused by `preview`.
+
+Use `check` to quickly validate whether the site will build cleanly without producing the full built site:
+
+```bash
+build-eips check
+```
+
+By default, `check`, `build`, and `serve` use the local workspace in dirty mode, which includes tracked working-tree edits from this repo. `preview` serves the last output written by `build`. Use `--clean` when you want to ignore tracked local proposal edits for one command:
+
+```bash
+build-eips check --clean
+build-eips build --clean
+build-eips serve --clean
+```
+
+For staging, production, parity, and remote-sibling modes, see `../WORKSPACE.md`.
+
+### Local Settings
+
+Local build settings live in `../.build-eips.toml`, which the setup script generates. Use that workspace file to change the local server address or local site URL:
+
+```toml
+[server]
+host = "127.0.0.1"
+port = 1111
+
+[site]
+base_url = "http://127.0.0.1:1111"
+```
+
+`serve` and `preview` use `[server]` for the local bind address. `build` and `serve` use `[site].base_url` when generating links.
+
+CLI flags such as `--host`, `--port`, and `--base-url` override the workspace config for one run:
+
+```bash
+build-eips serve --host 0.0.0.0 --port 3000 --base-url http://127.0.0.1:3000
+```
+
+### Render Specific Proposals Only
+
+Full local `build` and `serve` runs can take time because they process every proposal file. When you want to quickly test a single proposal or a specific batch, add a list of desired proposal numbers to the workspace `.build-eips.toml`:
+
+```toml
+[render]
+only = [555, 678]
+```
+
+Add one or more proposal numbers in `[render].only`, separated by commas. It's empty by default, but whenever it is populated, the regular `build` and `serve` commands render only those proposal pages. Links and references to excluded proposals are rewritten to the canonical public site.
+
+Use CLI `--only` when you want a one-run target list; it also overrides any proposals in `[render].only` for that run:
+
+```bash
+build-eips serve --only 555
+build-eips build --only 555
+build-eips build --only 555 678
+```
+
+Multiple proposal numbers in the CLI are space-separated; no commas.
+
+### Editorial Validation
+
+Use editorial commands to validate proposal files before opening or updating a pull request.
+
+- `editorial lint` runs targeted `eipw` proposal-rule checks.
+- `editorial check` runs `editorial lint`, then checks that the selected proposal changes will not prevent the full site from building cleanly.
+
+Check one or more specific proposals by number:
+
+```bash
+build-eips editorial check 1
+build-eips editorial check 1 123
+```
+
+For the closest match to PR CI, use `editorial check` against the proposal files changed versus upstream:
+
+```bash
+build-eips --staging editorial check --against-upstream --format github
+```
+
+Both commands accept the same selector modes:
+
+* proposal numbers or repo-relative proposal paths for explicit targets
+* `--working-tree` for tracked dirty proposal files
+* `--against-upstream` for proposal files changed versus the upstream merge-base
+* `--batch <path>` for a repeatable target list
+
+They also accept `eipw` options such as `--format github`.
+
+Use a batch file when you want to lint or check the same proposal set repeatedly. A batch file is a plain text file with one proposal number per line:
+
+```txt
+1
+7949
+```
+
+```bash
+build-eips editorial lint --batch ../editor-batch.txt
+build-eips editorial check --batch ../editor-batch.txt
+```
+
+### Full Workspace Reference
+
+For remote staging/production commands, parity commands, source overrides, side-by-side build roots, and detailed dirty-mode behavior, use the generated workspace guide at `../WORKSPACE.md`.
 
 ## Preferred Citation Format
 
-The canonical URL for an EIP that has achieved draft status at any point is at
-<https://eips.ethereum.org/>. For example, the canonical URL for EIP-1 is
-<https://eips.ethereum.org/1/>.
+The canonical URL for an EIP that has achieved draft status at any point is at <https://eips.ethereum.org/>. For example, the canonical URL for EIP-1 is <https://eips.ethereum.org/1/>.
 
-Consider any document not published at <https://eips.ethereum.org/> as a
-working paper. Additionally, consider published EIPs with a status of "draft",
-"review", or "last call" to be incomplete drafts, and note that their
-specification is likely to be subject to change.
+Consider any document not published at <https://eips.ethereum.org/> as a working paper. Additionally, consider published EIPs with a status of "draft", "review", or "last call" to be incomplete drafts, and note that their specification is likely to be subject to change.
 
 [^1]: <https://github.com/ethereum/EIPs/blob/master/.github/workflows/auto-review-bot.yml>
 [^2]: <https://github.com/ethereum/EIPs/blob/master/.github/workflows/ci.yml>
